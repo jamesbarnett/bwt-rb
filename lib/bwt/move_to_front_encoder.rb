@@ -9,14 +9,11 @@ module Bwt
       self.min_value_set = find_min_value_set
     end
 
-    require 'debugger'
-
     def encode
       encoded = []
       buffer = self.min_value_set.dup
 
       self.str.each_char do |c|
-        puts "buffer: #{buffer.join}"
         encoded << buffer.find_index(c)
 
         if encoded.last > 0

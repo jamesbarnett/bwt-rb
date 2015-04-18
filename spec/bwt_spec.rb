@@ -14,8 +14,7 @@ describe Bwt do
 
   it "encodes correctly" do
     result = encode("banana")
-    result.first.must_equal "nnbaaa"
-    result.last.must_equal 3
+    result.must_equal ["nnbaaa", 3]
   end
 
   it "encodes and decodes" do

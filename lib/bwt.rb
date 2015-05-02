@@ -26,7 +26,7 @@ module Bwt
     ps = [""] * encoded.first.length
 
     cs = encoded.first * encoded.first.length
-    indices = ((0..encoded.first.length-1).to_a * encoded.first.length)
+    indices = (0..encoded.first.length-1).to_a * encoded.first.length
 
     cs.chars.zip(indices).each do |c, i|
       ps[i] = c + ps[i]

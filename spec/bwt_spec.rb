@@ -8,8 +8,8 @@ describe Bwt do
     rotate("banana").must_equal "ananab"
   end
 
-  it "sorts permutations" do
-    sorted_permutations("banana").first.must_equal "abanan"
+  it "sorts rotations" do
+    sorted_rotations("banana").first.must_equal "abanan"
   end
 
   it "encodes correctly" do

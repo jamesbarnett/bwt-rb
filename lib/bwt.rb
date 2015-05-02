@@ -6,11 +6,11 @@ module Bwt
   end
 
   def encode(str)
-    ps = sorted_permutations(str)
+    ps = sorted_rotations(str)
     [last_column(ps), ps.find_index(str)]
   end
 
-  def sorted_permutations(str)
+  def sorted_rotations(str)
     ps = [str]
     0.upto(str.size - 2) do |i|
       ps << rotate(str, i)
@@ -23,17 +23,14 @@ module Bwt
   end
 
   def decode(encoded)
-    ps = [""]
-    pindex = 0
+    ps = [""] * encoded.first.length
 
-    while ps.any? {|px| px.size < encoded.first.size} do
-      encoded.first.each_char do |c|
-        ps[pindex] ||= ""
-        ps[pindex].prepend c
-        pindex = pindex + 1
-      end
-      pindex = 0
-      ps.sort!
+    cs = encoded.first * encoded.first.length
+    indices = ((0..encoded.first.length-1).to_a * encoded.first.length)
+
+    cs.chars.zip(indices).each do |c, i|
+      ps[i] = c + ps[i]
+      ps.sort! if i == encoded.first.length - 1
     end
 
     ps[encoded.last]
